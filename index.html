@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>resume</title>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/three.min.js"></script>
+	<script src="js/OrbitControls.js"></script>
+</head>
+<style>
+	html,
+	body,
+	div,
+	p,
+	ul,
+	ol,
+	li,
+	dl,
+	dt,
+	dd,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	form,
+	input,
+	select,
+	button,
+	textarea,
+	iframe,
+	table,
+	th,
+	td {
+		margin: 0;
+		padding: 0;
+		font-family: "Microsoft YaHei";
+	}
+
+	img {
+		border: 0 none;
+		vertical-align: top;
+	}
+
+	ul,
+	li,
+	dl,
+	dd,
+	dt {
+		list-style-type: none;
+	}
+
+	i,
+	em,
+	cite {
+		font-style: normal;
+	}
+
+	body {
+		-webkit-text-size-adjust: none;
+		font-family: "SimSun", Helvetica, Arial, "sans-serif", "PingFang SC";
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	a:focus,
+	input:focus,
+	select:focus {
+		outline: none;
+	}
+
+	html,
+	body {
+		height: 100%;
+		width: 100%;
+		overflow-x: hidden;
+		overflow-y: hidden;
+	}
+
+	.header {
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
+
+	.header:hover {
+		cursor: move;
+	}
+
+	.personal {
+		display: inline;
+		width: 30%;
+		position: absolute;
+		top: 32%;
+		left: 40%;
+		margin: auto;
+		color: #e0d8d8;
+		line-height: 30px;
+	}
+
+	.h_pic,
+	.h_font {
+		float: left;
+		font-size: .8rem;
+		font-weight: bold;
+	}
+
+	.h_pic {
+		width: 20%;
+		height: 80%;
+	}
+
+	.h_font {
+		width: 75%;
+		margin-left: 5%;
+		white-space: nowrap;
+		color: black;
+	}
+
+	.h_pic img {
+		width: 100%;
+		margin-top: 15%;
+		border-radius: 50%;
+	}
+
+	.times {
+		position: absolute;
+		right: 30px;
+		bottom: 20px;
+		color: #e0d8d8;
+		font-size: .9rem;
+	}
+
+	.start_btn {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 50px;
+		margin: auto;
+		height: 30px;
+		width: 30%;
+		background: #433A25;
+		border-radius: 90px;
+		color: white;
+		text-align: center;
+		font-size: .8rem;
+		line-height: 30px;
+		/*transition: 1s;*/
+	}
+
+	.start_btn:hover {
+		cursor: pointer;
+	}
+
+	.school {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		background: url(images/personal.jpg) no-repeat center;
+		background-size: cover;
+		text-shadow: 2px 2px white;
+	}
+
+	.title {
+		padding: 40px 0;
+		text-align: center;
+		font-size: 1.6rem;
+	}
+
+	.title span {
+		font-size: 1.3rem;
+	}
+
+	.infro {
+		width: 80%;
+		line-height: 30px;
+		font-size: 1.1rem;
+		/*padding-bottom: 60px;*/
+	}
+
+	.infro ul {
+		margin-left: 30px;
+	}
+
+	.school .start_btn {
+		text-shadow: none;
+	}
+
+	.skill {
+		position: relative;
+		background: url(images/personal.jpg) no-repeat left;
+		background-size: cover;
+		width: 100%;
+		height: 100%;
+	}
+
+	.s_li {
+		font-size: 1.1rem;
+		width: 60%;
+		height: 30px;
+		margin-top: 30px;
+		margin-left: 120px;
+	}
+
+	.s_li_spical {
+		margin-top: 0px;
+	}
+
+	.s_li span {
+		float: left;
+		width: 50%;
+		margin-right: 0%;
+	}
+
+	.progress {
+		position: relative;
+		float: left;
+		width: 100%;
+		height: 100%;
+		border-radius: 90px;
+		background: rgba(39, 39, 39, .5);
+	}
+
+	.p_inside {
+		position: absolute;
+		width: 0%;
+		height: 100%;
+		border-radius: 90px;
+		background: rgba(13, 178, 13, 1);
+	}
+
+	.works {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		background: url(images/personal.jpg) no-repeat right;
+		background-size: cover;
+	}
+
+	.w_main {
+		position: relative;
+		width: 80%;
+		height: 60%;
+		background: rgba(230, 230, 230, .7);
+		margin: auto;
+		overflow: hidden;
+	}
+
+	.w_main ul {
+		margin-left: 0%;
+		width: 100%;
+		height: 100%;
+	}
+
+	.w_main ul li {
+		float: left;
+		width: 25%;
+		height: 100%;
+		overflow: hidden;
+	}
+
+	.w_main ul li img {
+		margin-left: 10%;
+		width: 80%;
+	}
+
+	.contact {
+		position: relative;
+		height: 100%;
+		width: 100%;
+		background: url(images/personal.jpg) no-repeat top;
+	}
+
+	.con_contant {
+		width: 80%;
+		height: 60%;
+		background: rgba(235, 235, 235, .7);
+		margin: auto;
+	}
+
+	.last_btn {
+		background: none;
+		color: black;
+		font-size: 1rem;
+		width: 100%;
+	}
+
+	.con_contant ul {
+		padding-top: 6%;
+		line-height: 40px;
+	}
+
+	.con_contant ul li a {
+		color: black;
+	}
+
+	.con_phone {
+		display: none;
+	}
+
+	.title {
+		background-image: linear-gradient(to right,
+			red,
+			orange,
+			yellow,
+			green,
+			blue,
+			green,
+			yellow,
+			orange,
+			red,
+			orange,
+			yellow,
+			green,
+			blue,
+			green,
+			yellow,
+			orange,
+			red);
+		-webkit-text-fill-color: transparent;
+		-webkit-background-clip: text;
+		-webkit-background-size: 200% 100%;
+		animation: bgp 5s infinite linear;
+	}
+
+	@-webkit-keyframes bgp {
+		0% {
+			background-position: 0 0;
+		}
+
+		100% {
+			background-position: -100% 0;
+		}
+	}
+</style>
+
+<body onselectstart="return false">
+	<div class="header">
+		<div class="personal">
+			<div class="h_pic"></div>
+			<div class="h_font">
+				姓名：叶紫冷小寒<br>
+				学校：荆楚理工学院<br>
+				专业：计算机科学与技术<br>
+				期待岗位：H5开发工程师、web前端工程师
+			</div>
+		</div>
+		<div class="times">
+			<span>XXX</span>
+		</div>
+		<div class="start_btn">查看更多</div>
+	</div>
+	<div class="school">
+		<div class="title">个人介绍 <span>Personal Introductions</span></div>
+		<div class="infro">
+			<ul>
+				<li>姓名：叶紫冷小寒</li>
+				<li>学历：本科</li>
+				<li>籍贯：广东韶关</li>
+				<li>毕业院校：荆楚理工学院</li>
+				<li>专业：计算机科学与技术</li>
+				<li>工作经验：4年</li>
+				<li>邮箱：small_zhh@163.com</li>
+				<li>手机：18210308895</li>
+				<li>求职意向：前端工程师</li>
+			</ul>
+		</div>
+		<div class="start_btn">下一页</div>
+	</div>
+	<div class="skill">
+		<div class="title">专业技能 <span>professional skill</span></div>
+		<div class="s_li s_li_spical">
+			<span>ps切图:</span>
+			<div class="progress">
+				<div class="p_inside ps"></div>
+			</div>
+		</div>
+		<div class="s_li">
+			<span>css3:</span>
+			<div class="progress">
+				<div class="p_inside css3"></div>
+			</div>
+		</div>
+		<div class="s_li">
+			<span>h5:</span>
+			<div class="progress">
+				<div class="p_inside h5"></div>
+			</div>
+		</div>
+		<div class="s_li">
+			<span>js:</span>
+			<div class="progress">
+				<div class="p_inside js"></div>
+			</div>
+		</div>
+		<div class="s_li">
+			<span>jq:</span>
+			<div class="progress">
+				<div class="p_inside jq"></div>
+			</div>
+		</div>
+		<div class="s_li">
+			<span>three.js:</span>
+			<div class="progress">
+				<div class="p_inside three"></div>
+			</div>
+		</div>
+		<div class="start_btn">下一页</div>
+	</div>
+	<div class="works">
+		<div class="title">作品展示 <span>works show</span></div>
+		<div class="start_btn">下一页</div>
+		<div class="w_main">
+			<ul>
+				<li>
+					<a href="http://www.yeahworld.com/" target="blank"><img src="images/works3.png" /></a>
+				</li>
+				<li>
+					<a href="http://www.ayssen.com/" target="blank"><img src="images/works2.png" /></a>
+				</li>
+				<li>
+					<a href="http://www.lafitewu.top/Eng/" target="blank"><img src="images/works4.png" /></a>
+				</li>
+				<li>
+					<a href="http://www.17sucai.com//preview/703246/2017-10-21/game7.19_/" target="blank"><img src="images/works1.png" /></a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="contact">
+		<div class="title">联系方式 <span>contact information</span></div>
+		<div class="start_btn last_btn">---- The End ---</div>
+		<div class="con_contant infro">
+			<ul>
+				<li><a href="tencent://message/?uin=492419388&Site=安城默许流年&Menu=yes"><span
+						 class="con_phone">QQ联系</span></a></li>
+				<li><a href="tel://18210308895"><span class="con_phone">拨打手机</span></a></li>
+				<li><a href="https://www.cnblogs.com/small-zhh/">查看博客</a></li>
+				<li><a href="https://github.com/zhuhuahuablogs">查看GitHub</a></li>
+			</ul>
+		</div>
+	</div>
+</body>
+
+</html>
+<script>
+	$(function () {
+		function three() {
+			this.scence;
+			this.camera;
+			this.renderer;
+			this.light;
+			this.width;
+			this.height;
+			this.mesh;
+			this.mesh2;
+			this.turn;
+			this.controls;
+			this.storage = window.localStorage;
+		}
+		three.prototype = {
+			Scene: function () {
+				this.scence = new THREE.Scene();
+			},
+			render: function () {
+				this.width = $(".header").width();
+				this.height = $(".header").height();
+				this.renderer = new THREE.WebGLRenderer({
+					antialias: true
+				});
+				this.renderer.setSize(this.width, this.height);
+				$(".header").append(this.renderer.domElement);
+				this.renderer.setClearColor("#86A8CE");
+			},
+			Camera: function () {
+				this.camera = new THREE.PerspectiveCamera(45, this.width / this.height, 1, 10000);
+				this.camera.position.set(4, 6, 30);
+				this.camera.lookAt(new THREE.Vector3(0, 0, 0));
+			},
+			Controls: function () {
+				this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+				this.controls.dampingFactor = 5;
+				this.controls.enableZoom = false;
+			},
+			obj: function () {
+				var circle = new THREE.CubeGeometry(5, 5, 5);
+				var texture = new THREE.TextureLoader();
+				var material = new THREE.MeshBasicMaterial();
+				material.map = texture.load("images/pic.jpg");
+				this.mesh = new THREE.Mesh(circle, material);
+
+				if (this.width < 1200) {
+					this.phone();
+				} else {
+					ThreeJs.mesh.position.set(-10, 2, 0);
+				}
+				this.scence.add(this.mesh);
+
+				var bg = new THREE.SphereGeometry(755, 50, 50);
+				var material2 = new THREE.MeshBasicMaterial();
+				material2.map = texture.load("images/bg.jpg");
+				ThreeJs.mesh2 = new THREE.Mesh(bg, material2);
+				ThreeJs.mesh2.scale.x = -1;
+				ThreeJs.mesh2.position.set(0, 0, -220);
+				ThreeJs.scence.add(ThreeJs.mesh2);
+			},
+			animation: function () {
+				requestAnimationFrame(ThreeJs.animation);
+				ThreeJs.mesh.rotation.y += .01;
+				ThreeJs.mesh2.rotation.y += .001;
+				ThreeJs.controls.target.copy(ThreeJs.scence.position);
+				ThreeJs.controls.update();
+				ThreeJs.renderer.render(ThreeJs.scence, ThreeJs.camera);
+			},
+			phone: function () {
+				ThreeJs.mesh.position.set(0, 8, 0);
+				$(".h_font").css("marginLeft", "-100%");
+				$(".s_li").css("marginLeft", "30px");
+				$(".w_main ul").css({
+					"width": "400%"
+				});
+				$(".con_pc").hide();
+				$(".con_phone").show();
+			},
+			other: function () {
+				document.querySelector('body').addEventListener('touchmove', function (e) {
+					e.preventDefault();
+				});
+
+				function progressFn(opt) {
+					for (var i = 0; i < opt.dom.length; i++) {
+						$(opt.dom[i]).css({
+							"width": opt.width[i],
+							"transition": opt.time[i]
+						});
+					}
+				};
+				var now = new Date();
+				var time = now.getFullYear() + "-" + ((now.getMonth() + 1) < 10 ? "0" : "") + (now.getMonth() + 1) + "-" + (now
+					.getDate() < 10 ? "0" : "") + now.getDate();
+				$(".times span").html(time);
+				$(".start_btn").click(function () {
+					var index = 1;
+					$(this).parent().slideUp(800);
+					var parentName = $(this).parent()[0].className;
+					if (parentName == "school") {
+						progressFn({
+							dom: [".ps", ".css3", ".h5", ".js", ".jq", ".three"],
+							width: ["60%", "90%", "90%", "90%", "90%", "60%"],
+							"time": ["3s", "4s", "4s", "4s", "4s", "3s"]
+						});
+					} else if (parentName == "skill") {
+						if (ThreeJs.width < 1200) {
+							function gundong() {
+								$(".w_main ul").animate({
+									marginLeft: -index + "00%"
+								}, 1000);
+								index++;
+								if (index > 3) {
+									index = 0;
+								}
+							}
+							var Interval = setInterval(gundong, 2000);
+						}
+					} else if (parentName == "works") {
+						$(".start_btn").unbind("click");
+					}
+				});
+			},
+			start: function () {
+				this.Scene();
+				this.render();
+				this.Camera();
+				this.Controls();
+				this.obj();
+				this.other();
+				this.animation();
+				ThreeJs.renderer.render(ThreeJs.scence, ThreeJs.camera);
+			}
+		}
+		var ThreeJs = new three();
+		ThreeJs.start();
+	});
+</script>
